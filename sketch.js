@@ -27,32 +27,47 @@ function setup(){
     createCanvas(1000,800);
     
     //create the sprites and link the variables to the sprites 
-    background = createSprite(1000,800,10,10);
-    background.addImage(gardenImage);
-    background.scale = 0.5;
+    garden = createSprite(500,400,10,10);
+    garden.addImage(gardenImage);
+    garden.scale = 1;
 
-    cat = createSprite(800,700,10,10)
+    cat = createSprite(800,650,10,10)
     cat.addImage(startingCatImage);
-    cat.scale = 0.5;
+    cat.scale = 0.2;
 
-    mouse = createSprite(250,700,10,10)
+    mouse = createSprite(250,650,10,10)
     mouse.addImage(mouseImage);
-    mouse.scale = 0.5;
+    mouse.scale = 0.2;
 
 }
 
 function draw() {
 
-    background(255);
-    //Write condition here to evalute if tom and jerry collide
+    //add the code that when the left arrow is pressed the cat moves
+    if(cat.x - mouse.x <= cat.width/2 + mouse.width/2 && mouse.x - cat.x <= cat.width/2 + mouse.width/2){
+        cat.velocityX = 0;
+        cat.addAnimation("final", finalCatImage);
+        cat.changeAnimation("final");
+
+        mouse.addAnimation("final", finalMouseImage);
+        mouse.changeAnimation("final");
+    }
+    
 
     drawSprites();
 }
 
 
 function keyPressed(){
+    if(keyCode === LEFT_ARROW){
+        cat.velocityX = -5;
+        //cat.addAnimation("catrunning", movingCatAnimation);
+        cat.changeAnimation("catrunning", finalCatImage);
 
-  //For moving and changing animation write code here
+        //mouse.addAnimation("taunting", tauntingMouseAnimation);
+        mouse.changeAnimation("taunting", tauntingMouseAnimation);
+    }
+
 
 
 }
