@@ -15,7 +15,7 @@ function preload() {
     //for the mouse
     mouseImage = loadImage("mouse1.png");
     tauntingMouseAnimation = loadAnimation ("mouse2.png","mouse3.png");
-    finalCatImage = loadImage("mouse4.png");
+    finalMouseImage = loadImage("mouse4.png");
 
     //for the background
     gardenImage = loadImage("garden.png");
@@ -39,18 +39,25 @@ function setup(){
     mouse.addImage(mouseImage);
     mouse.scale = 0.2;
 
+    //set a collider
+    cat.setCollider("circle",0,0,20);
+    cat.debug = false;
+
+    mouse.setCollider("circle", 0,0,20);
+    mouse.debug = false;
+
 }
 
 function draw() {
 
     //add the code that when the left arrow is pressed the cat moves
-    if(cat.x - mouse.x <= cat.width/2 + mouse.width/2 && mouse.x - cat.x <= cat.width/2 + mouse.width/2){
+    if(cat.x - mouse.x <= cat.width/4 + mouse.width/4 && mouse.x - cat.x <= cat.width/4 + mouse.width/4){
         cat.velocityX = 0;
         cat.addAnimation("final", finalCatImage);
-        cat.changeAnimation("final");
+        cat.changeAnimation("final", finalCatImage);
 
-        mouse.addAnimation("final", finalMouseImage);
-        mouse.changeAnimation("final");
+        mouse.addAnimation("final1", finalMouseImage);
+        mouse.changeAnimation("final1", finalMouseImage);
     }
     
 
@@ -61,10 +68,10 @@ function draw() {
 function keyPressed(){
     if(keyCode === LEFT_ARROW){
         cat.velocityX = -5;
-        //cat.addAnimation("catrunning", movingCatAnimation);
+        cat.addAnimation("catrunning", movingCatAnimation);
         cat.changeAnimation("catrunning", finalCatImage);
 
-        //mouse.addAnimation("taunting", tauntingMouseAnimation);
+        mouse.addAnimation("taunting", tauntingMouseAnimation);
         mouse.changeAnimation("taunting", tauntingMouseAnimation);
     }
 
